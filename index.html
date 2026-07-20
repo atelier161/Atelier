@@ -123,8 +123,15 @@
     text-shadow:0 1px 6px rgba(0,0,0,0.35);
   }
   .navlink:hover{opacity:1;}
-  .burger{display:none; flex-direction:column; gap:5px; cursor:pointer; z-index:200;}
+  .burger{display:none; flex-direction:column; gap:5px; cursor:pointer; z-index:200; padding:10px; margin:-10px;}
   .burger span{width:24px; height:2px; background:#fff; transition:.3s;}
+  .navlinks.mobile-open{
+    display:flex !important;
+    position:fixed; top:70px; left:0; right:0;
+    flex-direction:column; background:var(--cream);
+    padding:24px 40px; gap:20px; z-index:150;
+  }
+  .navlinks.mobile-open .navlink{color:var(--ink); text-shadow:none;}
 
   /* ---------- HERO ---------- */
   .hero{
@@ -638,26 +645,20 @@
     renderTesti(testiIndex);
   }, 6000);
 
-  // Mobile menu (simple toggle -> shows nav links stacked)
+  // Mobile menu (class-based toggle, works with click and touch)
   const burger = document.getElementById('burger');
-  let menuOpen = false;
-  burger.addEventListener('click', () => {
-    menuOpen = !menuOpen;
-    const links = document.querySelector('.navlinks');
-    if(menuOpen){
-      links.style.display = 'flex';
-      links.style.position = 'fixed';
-      links.style.top = '70px';
-      links.style.left = '0';
-      links.style.right = '0';
-      links.style.flexDirection = 'column';
-      links.style.background = 'var(--cream)';
-      links.style.padding = '24px 40px';
-      links.style.gap = '20px';
-      links.querySelectorAll('.navlink').forEach(l => l.style.color = 'var(--ink)');
-    } else {
-      links.removeAttribute('style');
-    }
+  const navlinks = document.querySelector('.navlinks');
+
+  function toggleMenu(e){
+    e.preventDefault();
+    navlinks.classList.toggle('mobile-open');
+  }
+  burger.addEventListener('click', toggleMenu);
+  burger.addEventListener('touchend', toggleMenu);
+
+  // Close the menu after tapping a link
+  navlinks.querySelectorAll('.navlink').forEach(link => {
+    link.addEventListener('click', () => navlinks.classList.remove('mobile-open'));
   });
 </script>
 
