@@ -594,56 +594,6 @@
     });
   });
 
-  // Testimonials carousel
-  const testimonials = [
-    {
-      img: "casa-burgos-recamara.jpg",
-      quote: "“Nos guiaron en cada decisión, desde los planos hasta la última pieza de mobiliario. El resultado se siente completamente nuestro.”",
-      name: "Cliente residencial",
-      role: "Casa Burgos"
-    },
-    {
-      img: "portocumbres-nivel1-2.jpg",
-      quote: "“El proceso fue muy claro de principio a fin. Nos ayudaron a visualizar todo con 3D antes de mover un solo mueble.”",
-      name: "Cliente residencial",
-      role: "Casa Portocumbres"
-    },
-    {
-      img: "san-gennaro-bano.jpg",
-      quote: "“Cuidaron cada detalle de los acabados. Piezas únicas, hechas exactamente para nuestro espacio.”",
-      name: "Cliente residencial",
-      role: "Casa San Gennaro"
-    }
-  ];
-  let testiIndex = 0;
-  const testiImg = document.getElementById('testiImg');
-  const testiQuote = document.getElementById('testiQuote');
-  const testiWho = document.getElementById('testiWho');
-  const dotsWrap = document.getElementById('testiDots');
-
-  function renderTesti(i){
-    const t = testimonials[i];
-    testiImg.style.opacity = 0;
-    setTimeout(() => {
-      testiImg.src = t.img;
-      testiQuote.textContent = t.quote;
-      testiWho.innerHTML = '<b>' + t.name + '</b><span>' + t.role + '</span>';
-      testiImg.style.opacity = 1;
-    }, 200);
-    document.querySelectorAll('.testi-dot').forEach((d, idx) => d.classList.toggle('active', idx === i));
-  }
-  testimonials.forEach((t, idx) => {
-    const dot = document.createElement('div');
-    dot.className = 'testi-dot' + (idx === 0 ? ' active' : '');
-    dot.addEventListener('click', () => { testiIndex = idx; renderTesti(testiIndex); });
-    dotsWrap.appendChild(dot);
-  });
-  testiImg.style.transition = 'opacity .3s ease';
-  setInterval(() => {
-    testiIndex = (testiIndex + 1) % testimonials.length;
-    renderTesti(testiIndex);
-  }, 6000);
-
   // Mobile menu (class-based toggle)
   const burger = document.getElementById('burger');
   const navlinks = document.querySelector('.navlinks');
