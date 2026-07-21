@@ -644,16 +644,13 @@
     renderTesti(testiIndex);
   }, 6000);
 
-  // Mobile menu (class-based toggle, works with click and touch)
+  // Mobile menu (class-based toggle)
   const burger = document.getElementById('burger');
   const navlinks = document.querySelector('.navlinks');
 
-  function toggleMenu(e){
-    e.preventDefault();
+  burger.addEventListener('click', () => {
     navlinks.classList.toggle('mobile-open');
-  }
-  burger.addEventListener('click', toggleMenu);
-  burger.addEventListener('touchend', toggleMenu);
+  });
 
   // Close the menu after tapping a link
   navlinks.querySelectorAll('.navlink').forEach(link => {
